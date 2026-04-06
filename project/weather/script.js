@@ -16,7 +16,7 @@ let details = document.querySelector(".details");
 // let zipcode = document.querySelector("#zipCode");
 
 const getWeatherData = async (city="pune") => {
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=`;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=add the api key`;
   try {
     const res = await fetch(weatherUrl);
     const data = await res.json();
