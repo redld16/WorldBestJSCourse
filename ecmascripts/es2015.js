@@ -243,6 +243,9 @@ const user = { name: "Vinod", age: 30 };
 //? 1. Copying an array
 // let fruits = ["Apple", "Orange", "mango", "banana"];
 // let newFruits = [...fruits];
+// newFruits.push("guava", "grapes");
+
+// console.log(fruits);
 // console.log(newFruits);
 
 //? 2: Concatenating arrays / Combining arrays
@@ -279,12 +282,18 @@ const user = { name: "Vinod", age: 30 };
 // };
 
 //? with rest parameters
-const sum = (a, b, ...numbers) => {
-  //   console.log(typeof numbers);
-  return numbers.reduce((accum, curVal) => (accum = accum + curVal), 0);
-};
+// const sum = (...numbers) => {
+//   //   console.log(typeof numbers);
+//   return numbers.reduce((accum, curVal) => (accum = accum + curVal), 0);
+// };
 
-console.log(sum(1, 2, 3, 4));
+// console.log(sum(1, 2, 3, 4));
+// const sum = (a, b, ...numbers) => {
+//   //   console.log(typeof numbers);
+//   return a + b + numbers.reduce((accum, curVal) => (accum = accum + curVal), 0);
+// };
+
+// console.log(sum(1, 2, 3, 4));
 
 //TODO NOTE: A function definition can only have one rest parameter, and the rest parameter must be the last parameter in the function definition.
 // function wrong1(...one, ...wrong) {}

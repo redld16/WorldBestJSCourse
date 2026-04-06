@@ -5,7 +5,6 @@ let w_icon = document.querySelector(".weather_icon");
 let w_temperature = document.querySelector(".weather_temperature");
 let w_minTem = document.querySelector(".weather_min");
 let w_maxTem = document.querySelector(".weather_max");
-
 let w_feelsLike = document.querySelector(".weather_feelsLike");
 let w_humidity = document.querySelector(".weather_humidity");
 let w_wind = document.querySelector(".weather_wind");
@@ -53,7 +52,7 @@ citySearch.addEventListener("submit", (e) => {
 });
 
 const getWeatherData = async () => {
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=addYourOwnAPIKey`;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=809a8e28b17ffc3a86266af41c60f03c`;
   try {
     const res = await fetch(weatherUrl);
     const data = await res.json();

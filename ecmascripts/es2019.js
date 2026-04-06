@@ -15,7 +15,7 @@
 //? flat() is a new array instance method that can create a one-dimensional array from a multidimensional array. (nested arrays into a single, flat array.)
 
 // const nestedArray = [1, 2, [3, 4], 5];
-const nestedArray1 = [1, [2, [3, [4]]], 5];
+// const nestedArray1 = [1, [2, [3, [4]]], 5];
 
 // const flattenedArray = nestedArray.flat();
 // const flattenedArray = nestedArray1.flat(3);
@@ -23,7 +23,7 @@ const nestedArray1 = [1, [2, [3, [4]]], 5];
 
 //? flatMap() is a new Array instance method that combines flat() with map(). It’s useful when calling a function that returns an array in the map() callback, but you want your resulted array to be flat:
 
-// const arr = ["My name", "is vinod", "thapa"];
+// const arr = ["My name","is vinod","thapa"];
 // const newArr = arr.flatMap((curVal) => curVal.split(" "));
 // console.log(newArr);
 
@@ -38,8 +38,8 @@ const nestedArray1 = [1, [2, [3, [4]]], 5];
 // const entries = Object.entries(person);
 // // console.log(entries);
 
-// const newPerson = Object.fromEntries(entries);
-// console.log(newPerson);
+const newPerson = Object.fromEntries(entries);
+console.log(newPerson);
 
 // // // Now Think & let me know Why 🤔,
 // console.log(person == newPerson);

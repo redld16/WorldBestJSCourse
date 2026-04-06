@@ -23,8 +23,24 @@ querySelectorAll(selector) -->
       button,
       input {
         font-family: "Urbanist", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.7rem;
+        letter-spacing: 0.1rem;
+        line-height: 1.6;
+      }
+      .out {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: self-start;
+        flex-wrap: wrap;
+        max-width: 500px;
       }
     </style>
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <!-- it's a comment node  -->
   <body>
@@ -41,11 +57,38 @@ querySelectorAll(selector) -->
     </div>
     <div>
       <h1>DOM API 2</h1>
-      <input type="text" />
+      <input type="text" class="myinp" />
+      <div class="out">
+        <p class="keypress">keypress</p>
+        <p class="keycode">keycode</p>
+        <p class="charcode">charcode</p>
+        <p class="eventtype">event type</p>
+      </div>
       <button>click me</button>
       <div class="value"></div>
     </div>
     <script>
+      let inp = document.querySelector(".myinp");
+      let out = document.querySelector(".out");
+      let outkey = document.querySelector(".keypress");
+      let outkeycode = document.querySelector(".keycode");
+      let outcharcode = document.querySelector(".charcode");
+      let outtype = document.querySelector(".eventtype");
+
+      inp.addEventListener("keypress", handleKeypress);
+
+      function handleKeypress(e) {
+        // outkey.textContent = `${outkey.textContent} ${e.key}`;
+        // outkeycode.textContent = `${outkeycode.textContent} ${e.code}`;
+        // outcharcode.textContent = `${outcharcode.textContent} ${e.charCode}`;
+        // outtype.textContent = `${outtype.textContent} ${e.type}`;
+
+        outkey.textContent = `${e.key}`;
+        outkeycode.textContent = `${e.code}`;
+        outcharcode.textContent = `${e.charCode}`;
+        outtype.textContent = `${e.type}`;
+      }
+
       let findElementById = document.getElementById("heading");
       // let findElementById = document.getElementById("#heading"); ❌
       const findElementByClassName =

@@ -4,17 +4,17 @@
 
 //? A closure is created when an inner function has access to the variables of its outer function, even after the outer function has finished executing.
 
-function outerFunction() {
-  var outerVariable = "I'm from outer";
+// function outerFunction() {
+//   let outerVariable = "I'm from outer";
 
-  function innerFunction() {
-    console.log(outerVariable);
-  }
-  return innerFunction;
-}
+//   function innerFunction() {
+//     console.log(outerVariable);
+//   }
+//   return innerFunction;
+// }
 
-var closureFunction = outerFunction();
-console.dir(closureFunction);
+// var closureFunction = outerFunction();
+// console.dir(closureFunction);
 // closureFunction();
 
 // Here when we are calling the closureFunction() it is actually going to call the innerFunction() but in our executionContext the outerFunction is already popped  out. Still we can access the outerVariable value and how we are able to access it, is what closure all about ?
@@ -27,12 +27,12 @@ console.dir(closureFunction);
 
 //* also one more example
 
-function multiplier(factor) {
-  return function (number) {
-    console.log(number, factor);
-    return number * factor;
-  };
-}
+// function multiplier(factor) {
+//   return function (number) {
+//     console.log("factor:", factor, "number:", number);
+//     return number * factor;
+//   };
+// }
 
-const double = multiplier(2);
-console.log(double(5));
+// const double = multiplier(2);
+// console.log(double(5));

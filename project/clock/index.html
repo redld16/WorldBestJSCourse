@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+      integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: rgb(26, 25, 25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .watchDiv {
+        font-size: 2rem;
+        display: flex;
+        gap: 10px;
+        padding: 20px;
+        border: 3px solid rgb(127, 0, 255);
+        border-radius: 10px;
+        width: 50vw;
+        height: 30vh;
+        position: relative;
+        z-index: 100;
+        background-color: rgb(18, 55, 79);
+      }
+      .under {
+        background-color: rgb(127, 0, 255);
+        width: 25vw;
+        height: 20px;
+        border-radius: 10px;
+        margin: auto;
+        position: relative;
+        top: -5px;
+        z-index: 0;
+      }
+
+      .timeholder {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        color: white;
+      }
+
+      .timeoption {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        width: 20%;
+      }
+      .timeoption i {
+        cursor: pointer;
+        font-size: 1.4rem;
+        transition: color 0.3s;
+      }
+      .timeoption i:hover,
+      .timeoption i.active {
+        color: rgb(127, 0, 255);
+      }
+
+      .mainDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+      }
+      .mainDiv p {
+        font-size: 3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="watchDiv">
+        <div class="timeholder">
+          <div class="timeoption">
+            <i class="fas fa-clock" data-title="Time"></i>
+            <i class="fas fa-stopwatch" data-title="StopWatch"></i>
+            <i class="far fa-clock" data-title="CountDown"></i>
+          </div>
+          <div class="mainDiv">
+            <p id="time"></p>
+          </div>
+        </div>
+      </div>
+      <div class="under"></div>
+    </section>
+
+    <script>
+      let time = document.querySelector("#time");
+      let timeOption = document.querySelectorAll(".timeoption i");
+
+      let intervalId = null;
+
+      const currentTime = () => {
+        let date = new Date();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+        let ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
+        time.innerHTML = `${String(hours).padStart(2, "0")}:${String(
+          minutes
+        ).padStart(2, "0")}:${String(seconds).padStart(2, "0")} ${ampm}`;
+      };
+
+      currentTime();
+      intervalId = setInterval(currentTime, 1000);
+
+    //   timeOption.forEach((option) => {
+    //     option.addEventListener("click", () => {
+    //       let title = option.getAttribute("data-title");
+
+    //       switch (title) {
+    //         case "Time":
+    //           // Clear any active states
+    //           timeOption.forEach((opt) => opt.classList.remove("active"));
+
+    //           // ALWAYS clear first, then restart
+    //           clearInterval(intervalId);
+    //           intervalId = setInterval(currentTime, 1000);
+    //           currentTime();
+
+    //           // Blink effect
+    //           time.style.color = "rgb(127, 0, 255)";
+    //           setTimeout(() => {
+    //             time.style.color = "white";
+    //           }, 1000);
+    //           break;
+
+    //         case "StopWatch":
+    //           // ALWAYS clear interval first
+    //           clearInterval(intervalId);
+
+    //           // Toggle active state
+    //           const isActive = option.classList.toggle("active");
+
+    //           if (isActive) {
+    //             // Just became active (STOPPED state)
+    //             time.style.color = "rgb(127, 0, 255)";
+    //           } else {
+    //             // Just became inactive (RUNNING state)
+    //             intervalId = setInterval(currentTime, 1000);
+    //             time.style.color = "white";
+    //           }
+    //           break;
+
+    //         case "CountDown":
+    //           // Clear any active states
+    //           timeOption.forEach((opt) => opt.classList.remove("active"));
+
+    //           // ALWAYS clear first, then start
+    //           clearInterval(intervalId);
+    //           intervalId = setInterval(currentTime, 1000);
+    //           time.style.color = "white";
+    //           break;
+    //       }
+    //     });
+    //   });
+
+      timeOption.forEach((option) => {
+  option.addEventListener("click", () => {
+    let title = option.getAttribute("data-title");
+
+    switch (title) {
+      case "Time":
+        // Remove active from StopWatch if it has it
+        const stopWatch = document.querySelector("[data-title='StopWatch']");
+        stopWatch.classList.remove("active");
+
+        clearInterval(intervalId);
+        intervalId = setInterval(currentTime, 1000);
+        currentTime();
+
+        time.style.color = "rgb(127, 0, 255)";
+        setTimeout(() => {
+          time.style.color = "white";
+        }, 1000);
+        break;
+
+      case "StopWatch":
+        clearInterval(intervalId);
+        const isActive = option.classList.toggle("active");
+
+        if (isActive) {
+          time.style.color = "rgb(127, 0, 255)";
+        } else {
+          intervalId = setInterval(currentTime, 1000);
+          time.style.color = "white";
+        }
+        break;
+
+      case "CountDown":
+        // Remove active from StopWatch if it has it
+        const stopWatchIcon = document.querySelector("[data-title='StopWatch']");
+        stopWatchIcon.classList.remove("active");
+
+        clearInterval(intervalId);
+        intervalId = setInterval(currentTime, 1000);
+        time.style.color = "white";
+        break;
+    }
+  });
+});
+
+    </script>
+  </body>
+</html>

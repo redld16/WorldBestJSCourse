@@ -267,10 +267,17 @@
 
 // console.log("a".charCodeAt(0));
 // console.log("z".charCodeAt(0));
+// console.log(typeof String.fromCharCode(97));
 
-// for (let char = 97; char <= 122; char++) {
-//   console.log(String.fromCharCode(char));
+// function printAlphabets(start, end) {
+//   let startChar = start.charCodeAt(0);
+//   let endChar = end.charCodeAt(0);
+
+//   for (let i = startChar; i <= endChar; i++) {
+//     console.log(String.fromCharCode(i));
+//   }
 // }
+// printAlphabets("a", "j");
 
 //! 2: Write a function to count the number of vowels in a string?
 
@@ -286,41 +293,57 @@
 //   }
 //   return count;
 // };
-//   console.log(checkAllVowelPresentOrNot("my name u is vinod @  thapa"));
+//   console.log(countVowels("my name u is vinod @  thapa"));
 // console.log(countVowels("Hello a i o u world"));
+
+// function countVowels(str) {
+//   const matches = str.match(/[aeiou]/gi);
+// //   return matches ? matches.length : 0;
+
+// if(matches){
+//     console.log(matches);
+//     return matches.length;
+// }else{
+//     return 0
+// }
+
+// }
+
+// console.log(countVowels("my name u is vinod @  thapa"));
 
 //! 3: Write a function to check if all the vowels presents in a string or not?
 
 // const checkAllVowelPresentOrNot = (str) => {
 //   const vowels = "aeiou";
+//   const lowerStr = str.toLowerCase();
 //   for (let char of vowels) {
 //     // console.log(char);
 //     // console.log(str.includes(char));
-//     if (!str.includes(char)) {
+//     if (!lowerStr.includes(char)) {
 //       return false;
 //     }
 //   }
 //   return true;
 // };
 
-// console.log(checkAllVowelPresentOrNot("my name u is vinod @  thapa"));
+// console.log(checkAllVowelPresentOrNot("my name u is vind @  thapa"));
 
 //! 4: Write a JavaScript function to check if the given sting is Pangram or not?
 
-const pangramChecker = (str) => {
-  let inputArr = str.toLowerCase().split("");
-  // console.log(inputArr);
-  // // console.log("z".charCodeAt());
-  const values = inputArr.filter(
-    (curElem) =>
-      curElem.charCodeAt() >= "a".charCodeAt() &&
-      curElem.charCodeAt() <= "z".charCodeAt()
-  );
-  // console.log(values);
+// const pangramChecker = (str) => {
+//   let inputArr = str.toLowerCase().split("");
+//   // console.log(inputArr);
+//   // // console.log("z".charCodeAt());
+//   const values = inputArr.filter(
+//     (curElem) =>
+//       curElem.charCodeAt() >= "a".charCodeAt() &&
+//       curElem.charCodeAt() <= "z".charCodeAt()
+//   );
+//   // console.log(values);
 
-  return new Set(values).size === 26;
+//   return new Set(values).size === 26;
 
-  // return [...new Set(values)].length === 26;
-};
+//   // return [...new Set(values)].length === 26;
+// };
 
-console.log(pangramChecker("The quick  @ brown fox jumps ove the lazy dog"));
+// console.log(pangramChecker("The quick  @ brown fox jumps ove the lazy dog"));

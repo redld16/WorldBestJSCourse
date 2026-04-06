@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dad Jokes</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Urbanist", sans-serif;
+      }
+
+      body {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #241919;
+        color: #fff;
+      }
+
+      button {
+        background-color: rgb(136, 31, 56);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      .container {
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        padding: 2.4rem 6.4rem;
+        border-radius: 0.6rem;
+        color: #000;
+        min-width: 32rem;
+      }
+
+      .api_body {
+        font-size: 1.7rem;
+        letter-spacing: 0.1rem;
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to Dad Jokes!</h1>
+      <section class="api_body"></section>
+      <button id="fetchJoke">Get Another Joke</button>
+    </div>
+    <script>
+      const apiBody = document.querySelector(".api_body");
+      const apiUrl = "https://icanhazdadjoke.com/";
+      const btn = document.querySelector("#fetchJoke");
+
+      const showLoading = () => {
+        apiBody.textContent = "Loading...";
+        btn.disabled = true;
+      };
+
+      const hideLoading = () => {
+        btn.disabled = false;
+      };
+
+      const fetchData = async () => {
+        showLoading();
+        try {
+          const res = await fetch(apiUrl, {
+            headers: { Accept: "application/json" },
+          });
+          const data = await res.json();
+          console.log(data);
+          apiBody.textContent = data.joke;
+        } catch (error) {
+          apiBody.textContent = "API is not working 😞";
+        } finally {
+          hideLoading();
+        }
+      };
+
+      // Fetch a joke on page load
+      fetchData();
+      btn.addEventListener("click", fetchData);
+    </script>
+  </body>
+</html>

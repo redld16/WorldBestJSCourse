@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: rgb(61, 61, 78);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .watchDiv {
+        background-color: rgb(33, 31, 40);
+        color: white;
+        width: 30vw;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        gap: 10px;
+        border-radius: 10px;
+        border: 3px solid rgb(127, 0, 255);
+        overflow: auto;
+      }
+      .watchDiv::-webkit-scrollbar {
+        width: 5px;
+        background-color: rgb(46, 43, 43);
+        border-radius: 10px;
+      }
+
+      .watchDiv::-webkit-scrollbar-thumb {
+        background-color: rgb(207, 202, 211);
+        border-radius: 10px;
+      }
+      .watchDiv:hover {
+        box-shadow: 4px 1px 10px 1px rgb(127, 0, 255);
+      }
+      .time {
+        font-size: 4rem;
+        height: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .btnsClass {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      button {
+        background-color: rgb(127, 0, 255);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      button:disabled {
+        background-color: #666;
+        color: #999;
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      button:hover:not(:disabled) {
+        background-color: rgb(100, 0, 200);
+        transform: scale(1.05);
+      }
+      .showTime {
+        height: 30%;
+      }
+      .showTime p {
+        font-size: 15px;
+        text-align: center;
+
+        color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="watchDiv">
+      <div class="time">00</div>
+      <div class="btnsClass">
+        <button class="start">Start</button>
+        <button class="stop" disabled>Stop</button>
+        <button class="reset" >Reset</button>
+        <button class="clearTime">Clear Time</button>
+        <button class="getTime">Get Time</button>
+      </div>
+      <div class="showTime"></div>
+    </div>
+
+    <script>
+      const time = document.querySelector(".time");
+      //   const btns = document.querySelectorAll("button");
+      const showTime = document.querySelector(".showTime");
+      const startBtn = document.querySelector(".start");
+      const stopBtn = document.querySelector(".stop");
+
+      let intervalId = null;
+      let sec = 0;
+      const updatedBtn = () => {
+        if (intervalId !== null) {
+          startBtn.disabled = true;
+          stopBtn.disabled = false;
+        } else {
+          startBtn.disabled = false;
+          stopBtn.disabled = true;
+        }
+      };
+
+      const start = () => {
+        if (intervalId !== null) return;
+        intervalId = setInterval(() => {
+          sec++;
+          time.innerHTML = String(sec).padStart(2, "0");
+        }, 1000);
+        updatedBtn();
+      };
+
+      const stop = () => {
+        clearInterval(intervalId);
+        intervalId = null;
+        updatedBtn();
+      };
+
+      const reset = () => {
+        clearInterval(intervalId);
+        intervalId = null;
+        sec = 0;
+        time.innerHTML = "00";
+      };
+
+      const clearTime = () => {
+        showTime.innerHTML = "";
+      };
+
+      const getTime = () => {
+        let p = document.createElement("p");
+        p.innerText = `The stop time is ${time.innerHTML}`;
+        showTime.appendChild(p);
+      };
+
+      //   btns.forEach((btn) => {
+      //     let btnName = btn.getAttribute("class");
+      //     console.log(btnName);
+      //     btn.addEventListener("click", () => {
+      //       switch (btnName) {
+      //         case "start":
+      //           start();
+      //           break;
+      //         case "stop":
+      //           stop();
+      //           break;
+      //         case "reset":
+      //           reset();
+      //           break;
+      //         case "clearTime":
+      //           clearTime();
+      //           break;
+      //         case "getTime":
+      //           getTime();
+      //           break;
+      //       }
+      //     });
+      //   });
+
+      document.querySelector(".btnsClass").addEventListener("click", (e) => {
+        if (e.target.tagName !== "BUTTON") return;
+        let btnName = e.target.getAttribute("class");
+        switch (btnName) {
+          case "start":
+            start();
+            break;
+          case "stop":
+            stop();
+            break;
+          case "reset":
+            reset();
+            break;
+          case "clearTime":
+            clearTime();
+            break;
+          case "getTime":
+            getTime();
+            break;
+        }
+      });
+      updatedBtn();
+    </script>
+  </body>
+</html>

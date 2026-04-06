@@ -120,3 +120,4 @@
 //? window.screen.pixelDepth (Property):
 // Returns the number of bits used to represent each pixel.
 // Example: console.log(window.screen.pixelDepth).
+

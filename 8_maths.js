@@ -76,4 +76,9 @@
 //! Generate Random number
 //? Math.random(): Math.random() returns a random number between 0 (inclusive), and 1 (exclusive)
 
-console.log((Math.random() * 100).toFixed(3));
+// console.log((Math.random() * 100).toFixed(3));
+
+
+// get number from 1 to 10
+// let random = Math.floor(Math.random() * 10) + 1;
+// console.log(random);

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #fff;
+        background-image: linear-gradient(to right top, #65069c, #0e8812);
+      }
+      .btnDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn {
+        margin: 10px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .colorDiv {
+        margin-top: 20px;
+        width: 300px;
+        height: 100px;
+        color: #fff;
+        border-radius: 10px;
+        background-color: transparent;
+        border: 1px solid #fff;
+        padding: 10px 0 0 10px;
+        border-left: 5px solid #fff;
+        cursor: pointer;
+        font-size: 18px;
+      }
+      .copyText {
+        font-weight: bold;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="btnDiv">
+      <button class="btn" data-position="left">Left Color</button>
+      <button class="btn" data-position="right">Right Color</button>
+    </div>
+    <p class="copyText">Copy your Code here</p>
+
+    <div class="colorDiv">
+      <p class="colorCode"></p>
+    </div>
+
+    <script>
+      const btns = document.querySelectorAll(".btn");
+      const colorCode = document.querySelector(".colorCode");
+      const body = document.querySelector("body");
+      let rightBtn = document.querySelector(".btn[data-position='right']");
+      let leftBtn = document.querySelector(".btn[data-position='left']");
+      const copyText = document.querySelector(".copyText");
+
+      let leftColor = "0e8812";
+      let rightColor = "65069c";
+      colorCode.textContent = `background-image: linear-gradient(to right top, #${leftColor}, #${rightColor});`;
+      function getContrastColor(hexColor) {
+        const r = parseInt(hexColor.substr(0, 2), 16);
+        const g = parseInt(hexColor.substr(2, 2), 16);
+        const b = parseInt(hexColor.substr(4, 2), 16);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness > 128 ? "#000000" : "#ffffff";
+      }
+      function genrateColor(e) {
+        let randomColor = Math.floor(Math.random() * 16777215)
+          .toString(16)
+          .padStart(6, "0");
+
+        let top = "top";
+
+        // Then inside genrateColor(), after setting backgroundColor:
+        if (e.target.dataset.position === "left") {
+          leftColor = randomColor;
+          rightBtn.style.backgroundColor = "#" + randomColor;
+          rightBtn.style.color = getContrastColor(randomColor);
+          rightBtn.textContent = "#" + randomColor;
+          top = "top";
+        } else {
+          rightColor = randomColor;
+          leftBtn.style.backgroundColor = "#" + randomColor;
+          leftBtn.style.color = getContrastColor(randomColor);
+          leftBtn.textContent = "#" + randomColor;
+          top = "bottom";
+        }
+
+        body.style.backgroundImage = `linear-gradient(to right ${top},#${leftColor}, #${rightColor})`;
+        colorCode.textContent = `background-image: linear-gradient(${top}, #${leftColor}, #${rightColor});`;
+        colorCode.style.color = getContrastColor(randomColor);
+        copyText.style.color = getContrastColor(randomColor);
+      }
+
+      colorCode.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(colorCode.textContent);
+          alert("Copied!");
+        } catch (err) {
+          alert("Failed to copy");
+        }
+      });
+
+      btns.forEach((btn) => {
+        btn.addEventListener("click", genrateColor);
+      });
+    </script>
+  </body>
+</html>

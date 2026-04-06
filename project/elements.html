@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Periodic Table - Event Delegation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #0a0a0a;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+        margin: 2rem 0;
+        color: #d6417a;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        padding: 2rem;
+      }
+      .element {
+        width: 8rem;
+        height: 8rem;
+        border: 2px solid #d6417a;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(214, 65, 122, 0.2);
+      }
+      .element:hover {
+        background-color: #d6417a;
+        color: #000;
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(214, 65, 122, 0.4);
+      }
+      .element-symbol {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+      .element-number {
+        font-size: 1rem;
+        opacity: 0.8;
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Event Delegation - Periodic Table</h1>
+    <div class="container"></div>
+
+    <script>
+      // Create element with proper structure
+      const createElement = (number, symbol, name) => {
+        const element = document.createElement("div");
+        element.className = "element";
+        element.dataset.atomicNumber = number;
+        element.dataset.elementName = name;
+
+        element.innerHTML = `
+        <div class="element-symbol">${symbol}</div>
+        <div class="element-number">${number}</div>
+      `;
+
+        return element;
+      };
+
+      // Event handler
+      const handleClick = (event) => {
+        const element = event.target.closest(".element");
+        if (element) {
+          const { atomicNumber, elementName } = element.dataset;
+          alert(`Atomic Number: ${atomicNumber}\nElement: ${elementName}`);
+        }
+      };
+
+      // Initialize
+      const init = () => {
+        const container = document.querySelector(".container");
+
+        // Create fragment for better performance
+        const fragment = document.createDocumentFragment();
+
+        for (let i = 1; i <= 50; i++) {
+          const element = createElement(i, `Elem${i}`, `Element ${i}`);
+          fragment.appendChild(element);
+        }
+
+        container.appendChild(fragment);
+        container.addEventListener("click", handleClick);
+      };
+
+      init();
+
+     
+    </script>
+  </body>
+</html>

@@ -13,9 +13,9 @@
 
 //? The .at() method introduced in ES2022 has simplified this process. In a case of positive indexing, .at() will work the same as the square brackets. But for negative indexing, the .at() method allows starting the iteration from the end.
 
-// const array = [1, 2, 4, 5, 6, 7];
+const array = [1, 2, 4, 5, 6, 7];
 // // console.log(array[array.length - 1]);
-// console.log(array.at(-1));
+console.log(array.at(-1));
 
 //todo Note Datatypes supporting this function. 👇
 // String
@@ -29,10 +29,10 @@
 
 //? Object.hasOwn is the intended alternative for the Object.prototype.hasOwnProperty method. Although Object.prototype.hasOwnProperty has been in JavaScript specification for quite a time, it has some drawbacks.
 
-const book = {
-  name: "World Best JS Course",
-  author: "Thapa Technical",
-};
+// const book = {
+//   name: "World Best JS Course",
+//   author: "Thapa Technical",
+// };
 
 // // Using Object.prototype.hasOwnProperty() method
 // console.log(book.hasOwnProperty("name")); //Output: true
@@ -44,8 +44,8 @@ const book = {
 //! Issues with hasOwnProperty
 //? Issue 01: Doesn't work for objects created using Object.create(null)
 
-const student = Object.create(null);
-console.log(typeof student);
-student.name = "vinod";
+// const student = Object.create(null);
+// console.log(typeof student);
+// student.name = "vinod";
 // console.log(student.hasOwnProperty("name"));
-console.log(Object.hasOwn(student, "name"));
+// console.log(Object.hasOwn(student, "name"));

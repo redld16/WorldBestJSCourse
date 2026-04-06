@@ -12,6 +12,9 @@
 // new Date()
 // new Date(date string)
 
+// console.log(new Date(2025, 1, 19));
+// console.log(new Date(2025, 1, 19).toDateString());
+
 // new Date(year,month)
 // new Date(year,month,day)
 // new Date(year,month,day,hours)
@@ -124,6 +127,11 @@
 // const time = currentTime.getTime();
 // console.log(time);
 
+// let time = new Date().getTime();
+// console.log(time);
+// let time2 = new Date(time);
+// console.log(time2);
+
 //* ==================================================
 //* JavaScript Set Time Methods / Getting Components:
 //* ===================================================
@@ -204,7 +212,13 @@
 //   return new Date(updatedDate);
 // };
 
-// // Example usage:
+// const addDaysToDate = (date, extraDay) => {
+//   let newdate = new Date(date);
+//   newdate.setDate(newdate.getDate() + extraDay);
+//   return newdate.toLocaleString();
+// };
+
+// // // Example usage:
 // const date = new Date("2024-02-29");
 // const newDate = addDaysToDate(date, 7);
 // console.log(newDate);
@@ -218,7 +232,26 @@
 //   return Math.round(diff / oneDay);
 // };
 
-// // Example usage:
+// // // Example usage:
 // const date1 = new Date("2024-02-19");
 // const date2 = new Date("2024-03-01");
 // console.log(getDaysDifference(date1, date2)); // Output: 11 (difference in days)
+
+// let hello =setTimeout(() => {
+//    console.log("Hello");
+// }, 2000);
+
+// console.log("one");
+
+// // clearTimeout(hello);
+
+// console.log("two");
+
+// let hello = setInterval(() => {
+//   console.log("Hello");
+// }, 2000);
+
+// console.log("one");
+// setTimeout(() => clearInterval(hello), 3000);
+
+// console.log("two");

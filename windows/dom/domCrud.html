@@ -2,11 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;800&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="../style.css" />
     <style>
       body {
@@ -15,9 +12,15 @@
         justify-content: center;
         align-items: center;
       }
+      #inputField {
+        width: 200px;
+        padding: 5px;
+        font-size: 16px;
+        margin: 10px;
+        margin-left: 0;
+      }
     </style>
   </head>
-  <!-- it's a comment node  -->
   <body>
     <div>
       <h1>Simple DOM Todo App</h1>
@@ -25,20 +28,30 @@
       <button class="btn">click me</button>
       <div class="todoListsElem"></div>
     </div>
+
     <script>
       let inputElem = document.getElementById("inputField");
       let clickBtn = document.querySelector(".btn");
       let todoElem = document.querySelector(".todoListsElem");
-      // let todoFirst = document.getElementById("todoFirst");
 
       const addTodo = () => {
-        console.log(inputElem.value);
-        // todoFirst.textContent = inputElem.value;
-        let pElem = document.createElement("p");
-        pElem.textContent = inputElem.value;
-        console.log(pElem);
-        todoElem.append(pElem);
+        if (inputElem.value.trim() === "") return; // Prevent empty todos
 
+        // Create NEW elements for each todo
+        let pElem = document.createElement("p");
+        let delBtn = document.createElement("button");
+
+        pElem.textContent = inputElem.value;
+        delBtn.textContent = "delete";
+        delBtn.style.marginLeft = "20px";
+
+        // Add delete functionality
+        delBtn.addEventListener("click", (event) => {
+          event.target.parentElement.remove();
+        });
+
+        pElem.append(delBtn);
+        todoElem.append(pElem);
         inputElem.value = "";
       };
 
@@ -46,10 +59,9 @@
         addTodo();
       });
 
-      todoElem.addEventListener("click", (event) => {
-        console.log(event.target);
-        let currentElem = event.target;
-        currentElem.remove();
+      // Optional: Add todo on Enter key press
+      inputElem.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") addTodo();
       });
     </script>
   </body>
